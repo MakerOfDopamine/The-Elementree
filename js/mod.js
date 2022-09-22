@@ -1,8 +1,8 @@
 let modInfo = {
-	name: "The ??? Tree",
-	id: "mymod",
-	author: "nobody",
-	pointsName: "points",
+	name: "The Elementree",
+	id: "element-tree",
+	author: "The ѱ",
+	pointsName: "energy",
 	modFiles: ["layers.js", "tree.js"],
 
 	discordName: "",
@@ -13,14 +13,25 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0",
-	name: "Literally nothing",
+	num: "v0.0.1",
+	name: "The Birthplace",
 }
 
-let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.0</h3><br>
-		- Added things.<br>
-		- Added stuff.`
+let changelog = `
+	<h1>Changelog:</h1><br>
+	<h4>v0.0.1</h4><br>
+	- Added 5 Hydrogen Upgrades.
+	<h4>v0.0.0</h4><br>
+	- Game is officially created! Woohoo!
+`
+
+const V_GAME = {
+	MAX_BE_INT: new Decimal("(e^1.7976931348623156e308)1"),
+	MAX_SAFE_INT: new Decimal("9007199254740991"),
+	INFINITY: new Decimal(2).pow(1024),
+	LOG2: new Decimal(2).log10(),
+	LN2: new Decimal(2).ln(),
+}
 
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
 
@@ -42,8 +53,12 @@ function getPointGen() {
 	if(!canGenPoints())
 		return new Decimal(0)
 
-	let gain = new Decimal(1)
-	return gain
+	let gain = new Decimal(0)
+	if (hasUpgrade("h", 11)) gain = gain.plus(1)
+	if (hasUpgrade("h", 12)) gain = gain.mul(upgradeEffect("h", 12))
+	if (hasUpgrade("h", 13)) gain = gain.mul(upgradeEffect("h", 13))
+	if (hasUpgrade("h", 15)) gain = gain.mul(2)
+	return Decimal.min(V_GAME.MAX_BE_INT, gain)
 }
 
 // You can add non-layer related variables that should to into "player" and be saved here, along with default values
