@@ -8,7 +8,7 @@ addLayer("h", {
     }},
     color: "#4BDC13",
     requires: new Decimal(10), // Can be a function that takes requirement increases into account
-    resource: "prestige points", // Name of prestige currency
+    resource: "Hydrogen", // Name of prestige currency
     baseResource: "points", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
@@ -38,10 +38,15 @@ addLayer("h", {
             description: "Hydrogen boosts Energy.",
             cost: new Decimal(1),
             effect() {
-                return player.h.points.plus(2).sqrt()
+                if (hasUpgrade("h", 22))
+                    return player.h.points.plus(2).pow(0.65).pow(hasUpgrade("h", 21) ? upgradeEffect("h", 21) : 1)
+                return player.h.points.plus(2).sqrt().pow(hasUpgrade("h", 21) ? upgradeEffect("h", 21) : 1)
             },
             unlocked() {
                 return hasUpgrade("h", 11)
+            },
+            effectDisplay() {
+                return "Currently: " + format(upgradeEffect("h", 12)) + "x"
             }
         },
         13: {
@@ -49,10 +54,15 @@ addLayer("h", {
             description: "Energy boosts Energy.",
             cost: new Decimal(3),
             effect() {
-                return player.points.plus(10).log10()
+                if (hasUpgrade("h", 23))
+                    return player.points.plus(1).ln().plus(1).pow(1.25).pow(hasUpgrade("h", 21) ? upgradeEffect("h", 21) : 1)
+                return player.points.plus(1).log10().plus(1).pow(1.25).pow(hasUpgrade("h", 21) ? upgradeEffect("h", 21) : 1)
             },
             unlocked() {
                 return hasUpgrade("h", 12)
+            },
+            effectDisplay() {
+                return "Currently: " + format(upgradeEffect("h", 13)) + "x"
             }
         },
         14: {
@@ -60,10 +70,13 @@ addLayer("h", {
             description: "Energy boosts Hydrogen.",
             cost: new Decimal(10),
             effect() {
-                return player.points.plus(1).log10().pow(0.2).plus(1)
+                return player.points.plus(1).log10().pow(0.2).plus(1).pow(hasUpgrade("h", 21) ? upgradeEffect("h", 21) : 1)
             },
             unlocked() {
                 return hasUpgrade("h", 13)
+            },
+            effectDisplay() {
+                return "Currently: " + format(upgradeEffect("h", 14)) + "x"
             }
         },
         15: {
@@ -72,6 +85,36 @@ addLayer("h", {
             cost: new Decimal(15),
             unlocked() {
                 return hasUpgrade("h", 14)
+            }
+        },
+        21: {
+            title: "Hydrogen 6",
+            description: "Boost all above upgrades (Except Hydrogen 5) based on Energy.",
+            cost: new Decimal(40),
+            effect() {
+                return player.points.plus(10).log10().plus(10).log10().sqrt()
+            },
+            unlocked() {
+                return hasUpgrade("h", 15)
+            },
+            effectDisplay() {
+                return "Currently: ^" + format(upgradeEffect("h", 21), 3)
+            }
+        },
+        22: {
+            title: "Hydrogen 7",
+            description: "Hydrogen 2 Formula is improved. (^0.65)",
+            cost: new Decimal(80),
+            unlocked() {
+                return hasUpgrade("h", 21)
+            }
+        },
+        23: {
+            title: "Hydrogen 8",
+            description: "log10 in Hydrogen 3 is reduced to a ln.",
+            cost: new Decimal(250),
+            unlocked() {
+                return hasUpgrade("h", 22)
             }
         }
     }
