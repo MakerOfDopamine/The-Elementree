@@ -6,7 +6,7 @@ addLayer("h", {
         unlocked: true,
 		points: new Decimal(0),
     }},
-    color: "#4BDC13",
+    color: "#063971",
     requires: new Decimal(10), // Can be a function that takes requirement increases into account
     resource: "Hydrogen", // Name of prestige currency
     baseResource: "points", // Name of resource prestige is based on
@@ -115,6 +115,49 @@ addLayer("h", {
             cost: new Decimal(250),
             unlocked() {
                 return hasUpgrade("h", 22)
+            }
+        },
+        24: {
+            title: "Hydrogen 9",
+            description: "For every upgrade multiply Energy gain by 1.3 times.",
+            cost: new Decimal(1000),
+            unlocked() {
+                return hasUpgrade("h", 23)
+            },
+            effect() {
+                let count = 0
+                for (let i = 1; i < 5; i++) {
+                    for (let j = 1; j < 5; j++) {
+                        count += (hasUpgrade("h", Number(String(i) + String(j))) ? 1 : 0)
+                    }
+                }
+                return new Decimal(1.3).pow(count)
+            },
+            effectDisplay() {
+                return "Currently: x" + format(upgradeEffect("h", 24), 2)
+            }
+        },
+        25: {
+            title: "Hydrogen 10",
+            description: "Unlock a Buyable.",
+            cost: new Decimal(10000),
+            unlocked() {
+                return hasUpgrade("h", 24)
+            }
+        }
+    },
+    buyables: {
+        11: {
+            cost(x) { return new Decimal(2.5).pow(x).mul(2000) },
+            display() { return "Double energy gain.<br>Currently: " + format(this.effect(), 2) + "x<br>Cost: " + format(this.cost(), 2) },
+            canAfford() { return player[this.layer].points.gte(this.cost()) },
+            effect() { return new Decimal(2).pow(getBuyableAmount("h", 11))},
+            buy() {
+                player[this.layer].points = player[this.layer].points.sub(this.cost())
+                setBuyableAmount("h", 11, getBuyableAmount("h", 11).add(1))
+            },
+            unlocked() {
+                return hasUpgrade("h", 25)
             }
         }
     }

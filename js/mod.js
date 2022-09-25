@@ -13,12 +13,16 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "v0.0.2",
+	num: "v0.0.3",
 	name: "The Birthplace",
 }
 
 let changelog = `
 	<h1>Changelog:</h1><br>
+	<h4>v0.0.3</h4><br>
+	- Added 2 more upgrades.
+	- Added a buyable.
+	- Changes colors of the layer.
 	<h4>v0.0.2</h4><br>
 	- Made some effect display text.
 	- Added 3 more Hydrogen Upgrades.
@@ -61,6 +65,8 @@ function getPointGen() {
 	if (hasUpgrade("h", 12)) gain = gain.mul(upgradeEffect("h", 12))
 	if (hasUpgrade("h", 13)) gain = gain.mul(upgradeEffect("h", 13))
 	if (hasUpgrade("h", 15)) gain = gain.mul(2)
+	if (hasUpgrade("h", 24)) gain = gain.mul(upgradeEffect("h", 24))
+	gain = gain.mul(buyableEffect("h", 11))
 	return Decimal.min(V_GAME.MAX_BE_INT, gain)
 }
 
