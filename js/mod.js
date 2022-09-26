@@ -3,7 +3,7 @@ let modInfo = {
 	id: "element-tree",
 	author: "The ѱ",
 	pointsName: "energy",
-	modFiles: ["layers.js", "tree.js"],
+	modFiles: ["layers.js", "tree.js", "ach.js"],
 
 	discordName: "",
 	discordLink: "",
@@ -19,6 +19,9 @@ let VERSION = {
 
 let changelog = `
 	<h1>Changelog:</h1><br>
+	<h4>v0.0.4</h4><br>
+	- Made achievements.
+	- Added more upgrade stuff.
 	<h4>v0.0.3</h4><br>
 	- Added 2 more upgrades.
 	- Added a buyable.

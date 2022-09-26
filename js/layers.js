@@ -144,6 +144,9 @@ addLayer("h", {
             unlocked() {
                 return hasUpgrade("h", 24)
             }
+        },
+        31: {
+            title: "Deuterium 1",
         }
     },
     buyables: {
@@ -160,5 +163,16 @@ addLayer("h", {
                 return hasUpgrade("h", 25)
             }
         }
+    },
+    milestones: {
+        11: {
+            requirementDescription: "100,000 Hydrogen",
+            effectDescription: "Gain 10% of Hydrogen gain on reset every second.",
+            done() { return player.h.points.gte(100000) }
+        }
+    },
+    passiveGeneration() {
+        if (hasMilestone("h", 11)) return 0.1
+        return 0
     }
 })
