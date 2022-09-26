@@ -147,6 +147,8 @@ addLayer("h", {
         },
         31: {
             title: "Deuterium 1",
+            description: "Unlock deuterium.",
+            cost: new Decimal(250000)
         }
     },
     buyables: {
@@ -167,12 +169,12 @@ addLayer("h", {
     milestones: {
         11: {
             requirementDescription: "100,000 Hydrogen",
-            effectDescription: "Gain 10% of Hydrogen gain on reset every second.",
+            effectDescription: "Gain 10% of Hydrogen gain on reset every second, capping at 1000% of your hydrogen on reset.",
             done() { return player.h.points.gte(100000) }
         }
     },
     passiveGeneration() {
-        if (hasMilestone("h", 11)) return 0.1
+        if (hasMilestone("h", 11) && player.h.points.lte(getResetGain("h").mul(10))) return 0.1
         return 0
     }
 })

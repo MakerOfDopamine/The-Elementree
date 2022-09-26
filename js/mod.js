@@ -70,6 +70,7 @@ function getPointGen() {
 	if (hasUpgrade("h", 15)) gain = gain.mul(2)
 	if (hasUpgrade("h", 24)) gain = gain.mul(upgradeEffect("h", 24))
 	gain = gain.mul(buyableEffect("h", 11))
+	//gain = gain.mul(player.h2.effect()[0])
 	return Decimal.min(V_GAME.MAX_BE_INT, gain)
 }
 
