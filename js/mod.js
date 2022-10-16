@@ -58,7 +58,7 @@ function getPointGen() {
 	if (hasUpgrade("p", 11)) gain = new Decimal(1)
 	if (hasUpgrade("p", 12)) gain = gain.add(3)
 
-	gain = gain.div(Decimal.max(player.points.pow(2), 1))
+	gain = gain.div(Decimal.max(getPointSoftcap(), 1))
 	return Decimal.min(V_GAME.MAX_BE_INT, gain)
 }
 
