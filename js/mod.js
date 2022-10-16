@@ -1,38 +1,26 @@
 let modInfo = {
-	name: "The Elementree",
-	id: "element-tree",
-	author: "The ѱ",
-	pointsName: "energy",
+	name: "The Timewall",
+	id: "walloftime",
+	author: "",
+	pointsName: "Points",
 	modFiles: ["layers.js", "tree.js", "ach.js"],
 
 	discordName: "",
 	discordLink: "",
-	initialStartPoints: new Decimal (10), // Used for hard resets and new players
+	initialStartPoints: new Decimal (5), // Used for hard resets and new players
 	offlineLimit: 1,  // In hours
 }
 
 // Set your version in num and name
 let VERSION = {
-	num: "v0.0.3",
-	name: "The Birthplace",
+	num: "v0.0.0",
+	name: "Timewall",
 }
 
 let changelog = `
 	<h1>Changelog:</h1><br>
-	<h4>v0.0.4</h4><br>
-	- Made achievements.
-	- Added more upgrade stuff.
-	<h4>v0.0.3</h4><br>
-	- Added 2 more upgrades.
-	- Added a buyable.
-	- Changes colors of the layer.
-	<h4>v0.0.2</h4><br>
-	- Made some effect display text.
-	- Added 3 more Hydrogen Upgrades.
-	<h4>v0.0.1</h4><br>
-	- Added 5 Hydrogen Upgrades.
 	<h4>v0.0.0</h4><br>
-	- Game is officially created! Woohoo!
+	- Started Game.
 `
 
 const V_GAME = {
@@ -41,6 +29,9 @@ const V_GAME = {
 	INFINITY: new Decimal(2).pow(1024),
 	LOG2: new Decimal(2).log10(),
 	LN2: new Decimal(2).ln(),
+	psc: {
+		first: new Decimal(10).sub(new Decimal(10).pow(0.8))
+	}
 }
 
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
@@ -64,13 +55,10 @@ function getPointGen() {
 		return new Decimal(0)
 
 	let gain = new Decimal(0)
-	if (hasUpgrade("h", 11)) gain = gain.plus(1)
-	if (hasUpgrade("h", 12)) gain = gain.mul(upgradeEffect("h", 12))
-	if (hasUpgrade("h", 13)) gain = gain.mul(upgradeEffect("h", 13))
-	if (hasUpgrade("h", 15)) gain = gain.mul(2)
-	if (hasUpgrade("h", 24)) gain = gain.mul(upgradeEffect("h", 24))
-	gain = gain.mul(buyableEffect("h", 11))
-	//gain = gain.mul(player.h2.effect()[0])
+	if (hasUpgrade("p", 11)) gain = new Decimal(1)
+	if (hasUpgrade("p", 12)) gain = gain.add(3)
+
+	gain = gain.div(Decimal.max(player.points.pow(2), 1))
 	return Decimal.min(V_GAME.MAX_BE_INT, gain)
 }
 
@@ -78,8 +66,15 @@ function getPointGen() {
 function addedPlayerData() { return {
 }}
 
+function getPointSoftcap() {
+	if (player.points.gte(10)) return Decimal.max(player.points.sub(V_GAME.psc.first).pow(1.25), 1)
+	return Decimal.max(player.points, 1)
+}
 // Display extra things at the top of the page
 var displayThings = [
+	()=>{
+		return (player.p.total.lt(1) || player.points.lte(1)) ? `` : `Your point gain is divided by ${format(getPointSoftcap(), 2) + (player.points.gte(10) ? " (scaled)" : "")}`
+	}
 ]
 
 // Determines when the game "ends"
