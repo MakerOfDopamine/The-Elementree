@@ -35,6 +35,28 @@ addLayer("p", {
             description: "Gain 2 more points per second.",
             cost: new Decimal(5),
             unlocked() {return hasUpgrade("p", 11)}
+        },
+        13: {
+            title: "13",
+            description: "Point gain softcap is slightly weaker.",
+            cost: new Decimal(10),
+            unlocked() {return hasUpgrade("p", 12)}
+        },
+        14: {
+            title: "14",
+            description: "Total Prestige Points multiply point gain.",
+            cost: new Decimal(50),
+            unlocked() {return hasUpgrade("p", 13)},
+            effect() {return decimalOne.plus(player.p.total.log(10))},
+            effectDisplay() {
+                return "x" + format(this.effect(), 2)
+            }
+        },
+        15: {
+            title: "15",
+            description: "Triple point gain.",
+            cost: new Decimal(100),
+            unlocked() {return hasUpgrade("p", 14)}
         }
     }
 })

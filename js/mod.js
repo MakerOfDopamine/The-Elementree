@@ -57,23 +57,37 @@ function getPointGen() {
 	let gain = new Decimal(0)
 	if (hasUpgrade("p", 11)) gain = new Decimal(1)
 	if (hasUpgrade("p", 12)) gain = gain.add(3)
-
+	if (hasUpgrade("p", 14)) gain = gain.mul(upgradeEffect("p", 14))
+	if (hasUpgrade("p", 15)) gain = gain.mul(3)
 	gain = gain.div(Decimal.max(getPointSoftcap(), 1))
 	return Decimal.min(V_GAME.MAX_BE_INT, gain)
 }
 
 // You can add non-layer related variables that should to into "player" and be saved here, along with default values
 function addedPlayerData() { return {
+	softcapStart: {
+		first: new Decimal(10)
+	}
 }}
 
 function getPointSoftcap() {
-	if (player.points.gte(10)) return Decimal.max(player.points.sub(V_GAME.psc.first).pow(1.25), 1)
-	return Decimal.max(player.points, 1)
+	softcapExpo = 1
+	if (hasUpgrade("p", 13)) softcapExpo = 0.95
+	if (player.points.gte(10)) return Decimal.max(player.points.sub(V_GAME.psc.first).pow(softcapExpo+0.25), 1)
+	return Decimal.max(player.points.pow(softcapExpo), 1)
 }
+
+function getSecondPointSoftcap() {
+	return Decimal.min(player.points.div(100))
+}
+
 // Display extra things at the top of the page
 var displayThings = [
 	()=>{
 		return (player.p.total.lt(1) || player.points.lte(1)) ? `` : `Your point gain is divided by ${format(getPointSoftcap(), 2) + (player.points.gte(10) ? " (scaled)" : "")}`
+	},
+	()=>{
+		return (player.points.gte(100)) ? `Your point gain is raised to ^${format(getSecondPointSoftcap(), 4)}.` : ``
 	}
 ]
 
