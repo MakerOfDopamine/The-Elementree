@@ -1,9 +1,9 @@
 let modInfo = {
-	name: "The Elementree",
-	id: "element-tree",
-	author: "The ѱ",
-	pointsName: "energy",
-	modFiles: ["layers.js", "tree.js", "ach.js"],
+	name: "The ??? Tree",
+	id: "mymod",
+	author: "nobody",
+	pointsName: "points",
+	modFiles: ["layers.js", "tree.js"],
 
 	discordName: "",
 	discordLink: "",
@@ -13,35 +13,14 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "v0.0.3",
-	name: "The Birthplace",
+	num: "0.0",
+	name: "Literally nothing",
 }
 
-let changelog = `
-	<h1>Changelog:</h1><br>
-	<h4>v0.0.4</h4><br>
-	- Made achievements.
-	- Added more upgrade stuff.
-	<h4>v0.0.3</h4><br>
-	- Added 2 more upgrades.
-	- Added a buyable.
-	- Changes colors of the layer.
-	<h4>v0.0.2</h4><br>
-	- Made some effect display text.
-	- Added 3 more Hydrogen Upgrades.
-	<h4>v0.0.1</h4><br>
-	- Added 5 Hydrogen Upgrades.
-	<h4>v0.0.0</h4><br>
-	- Game is officially created! Woohoo!
-`
-
-const V_GAME = {
-	MAX_BE_INT: new Decimal("(e^1.7976931348623156e308)1"),
-	MAX_SAFE_INT: new Decimal("9007199254740991"),
-	INFINITY: new Decimal(2).pow(1024),
-	LOG2: new Decimal(2).log10(),
-	LN2: new Decimal(2).ln(),
-}
+let changelog = `<h1>Changelog:</h1><br>
+	<h3>v0.0</h3><br>
+		- Added things.<br>
+		- Added stuff.`
 
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
 
@@ -63,15 +42,8 @@ function getPointGen() {
 	if(!canGenPoints())
 		return new Decimal(0)
 
-	let gain = new Decimal(0)
-	if (hasUpgrade("h", 11)) gain = gain.plus(1)
-	if (hasUpgrade("h", 12)) gain = gain.mul(upgradeEffect("h", 12))
-	if (hasUpgrade("h", 13)) gain = gain.mul(upgradeEffect("h", 13))
-	if (hasUpgrade("h", 15)) gain = gain.mul(2)
-	if (hasUpgrade("h", 24)) gain = gain.mul(upgradeEffect("h", 24))
-	gain = gain.mul(buyableEffect("h", 11))
-	//gain = gain.mul(player.h2.effect()[0])
-	return Decimal.min(V_GAME.MAX_BE_INT, gain)
+	let gain = new Decimal(1)
+	return gain
 }
 
 // You can add non-layer related variables that should to into "player" and be saved here, along with default values
