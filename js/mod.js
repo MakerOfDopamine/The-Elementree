@@ -1,26 +1,29 @@
 let modInfo = {
-	name: "The ??? Tree",
-	id: "mymod",
-	author: "nobody",
-	pointsName: "points",
-	modFiles: ["layers.js", "tree.js"],
+	name: "The Synergism Tree",
+	id: "synergism2",
+	author: "Harry",
+	pointsName: "???",
+	modFiles: ["layers.js", "tree.js", "math.js"],
 
 	discordName: "",
 	discordLink: "",
-	initialStartPoints: new Decimal (10), // Used for hard resets and new players
+	initialStartPoints: new Decimal (0), // Used for hard resets and new players
 	offlineLimit: 1,  // In hours
 }
+pm = 1
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0",
-	name: "Literally nothing",
+	num: 0,
+	name: "Started",
 }
 
-let changelog = `<h1>Changelog:</h1><br>
+let changelog = `
+	<h1>Changelog:</h1><br>
 	<h3>v0.0</h3><br>
-		- Added things.<br>
-		- Added stuff.`
+		- Added Coin layer.
+		- Endgame at 1 alchemy.
+`
 
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
 
@@ -34,16 +37,12 @@ function getStartPoints(){
 
 // Determines if it should show points/sec
 function canGenPoints(){
-	return true
+	return false
 }
 
 // Calculate points/sec!
 function getPointGen() {
-	if(!canGenPoints())
-		return new Decimal(0)
-
-	let gain = new Decimal(1)
-	return gain
+	return new Decimal(0)
 }
 
 // You can add non-layer related variables that should to into "player" and be saved here, along with default values
@@ -56,7 +55,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("e280000000"))
+	return player.c.buyables["15"].gte(1)
 }
 
 
