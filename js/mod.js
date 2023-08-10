@@ -1,7 +1,7 @@
 let modInfo = {
-	name: "The ??? Tree",
-	id: "mymod",
-	author: "nobody",
+	name: "The Chess Tree",
+	id: "chesstree",
+	author: "Psi",
 	pointsName: "points",
 	modFiles: ["layers.js", "tree.js"],
 
@@ -17,10 +17,12 @@ let VERSION = {
 	name: "Literally nothing",
 }
 
-let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.0</h3><br>
-		- Added things.<br>
-		- Added stuff.`
+let changelog = `
+<h1>Changelog:</h1><br>
+<h3>v0.0</h3><br>
+- Added things.<br>
+- Added stuff.
+`
 
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
 
@@ -42,7 +44,7 @@ function getPointGen() {
 	if(!canGenPoints())
 		return new Decimal(0)
 
-	let gain = new Decimal(1)
+	let gain = new Decimal(0)
 	return gain
 }
 
