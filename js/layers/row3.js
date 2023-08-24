@@ -20,7 +20,7 @@ addLayer("m", {
     gainExp() { // Calculate the exponent on main currency from bonuses
         return new Decimal(1)
     },
-    row: 0, // Row the layer is in on the tree (0 is the first row)
+    row: 2, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
         {key: "m", description: "M: Reset electric charge for molecules", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
