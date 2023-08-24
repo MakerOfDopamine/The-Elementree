@@ -63,6 +63,8 @@ function getPointGen() {
   
   if (hasUpgrade('a', 13)) gain = gain.mul(upgradeEffect('a', 13))
   if (hasUpgrade('a', 23)) gain = gain.mul(upgradeEffect('a', 23))
+
+  if (hasMilestone('m', 11)) gain = gain.mul(2)
   gain = gain.mul(buyableEffect('a', 31))
   
   if (hasUpgrade('e', 11)) gain = gain.mul(20)

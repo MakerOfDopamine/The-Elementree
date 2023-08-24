@@ -6,13 +6,13 @@ addLayer("m", {
         unlocked: true,
 		  points: new Decimal(0),
     }},
-    color: "#FFFFFF",
-    requires: new Decimal(10), // Can be a function that takes requirement increases into account
-    resource: "protons", // Name of prestige currency
-    baseResource: "quarks", // Name of resource prestige is based on
-    baseAmount() {return player.points}, // Get the current amount of baseResource
+    color: "#800080",
+    requires: new Decimal(1e14), // Can be a function that takes requirement increases into account
+    resource: "molecule", // Name of prestige currency
+    baseResource: "charge", // Name of resource prestige is based on
+    baseAmount() {return player.e.points}, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    exponent: 0.5, // Prestige currency exponent
+    exponent: 0.25, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         return mult
@@ -22,7 +22,14 @@ addLayer("m", {
     },
     row: 0, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
-        {key: "p", description: "P: Reset quarks for protons", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+        {key: "m", description: "M: Reset electric charge for molecules", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return true}
+    layerShown(){return true},
+    milestones: {
+        0: {
+            requirementDescription: "1 molecules",
+            effectDescription: "Double quark and P/N gain, and Atom requirement is halved.",
+            done() { return player.m.points.gte(1) } 
+        }
+    }
 })
