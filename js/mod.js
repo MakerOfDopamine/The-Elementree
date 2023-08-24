@@ -3,7 +3,7 @@ let modInfo = {
 	id: "communitytree-butThisMightNotBeUniqueSo->9356109651926510569346011334876260698",
 	author: "Thenonymous, with assistance from Harry for the Fans",
 	pointsName: "quarks",
-	modFiles: ["layers/row1.js", "layers/row2.js", "tree.js"],
+	modFiles: ["layers/row1.js", "layers/row2.js", "layers/row3.js", "tree.js"],
 
 	discordName: "",
 	discordLink: "",
@@ -13,12 +13,13 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "1.0",
-	name: "The Beginning",
+	num: "1.1_β1",
+	name: "The First Day",
 }
 
 let changelog = `
 <h1>Changelog:</h1><br>
+
 <h3>v1.0</h3><br>
 - Added Quarks.<br>
 - Added Protons.<br>

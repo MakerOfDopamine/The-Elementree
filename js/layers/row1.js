@@ -157,6 +157,7 @@ addLayer("ach", {
       if (hasUpgrade("a", 11)) mult = mult.mul(upgradeEffect("a", 11));
       if (hasUpgrade("a", 22)) mult = mult.mul(upgradeEffect("a", 22));
       if (hasUpgrade("e", 23)) mult = mult.mul(upgradeEffect("e", 23));
+      if (hasMilestone("m", 11)) mult = mult.mul(2)
       mult = mult.mul(buyableEffect('a', 31));
       return mult;
     },
@@ -279,6 +280,7 @@ addLayer("ach", {
       if (hasUpgrade("a", 12)) mult = mult.mul(upgradeEffect("a", 12));
       if (hasUpgrade("a", 21)) mult = mult.mul(upgradeEffect("a", 21));
       if (hasUpgrade("e", 23)) mult = mult.mul(upgradeEffect("e", 23));
+      if (hasMilestone("m", 11)) mult = mult.mul(2)
       mult = mult.mul(buyableEffect('a', 31));
       return mult;
     },
