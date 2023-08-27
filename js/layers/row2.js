@@ -56,7 +56,7 @@ addLayer("a", {
     tabFormat: {
       Main: {
         unlocked() {
-          return hasMilestone("a", 1);
+          return hasMilestone("a", 1) || player.m.points.gte(1);
         },
         content: [
           "main-display", // start of necessary
@@ -71,7 +71,7 @@ addLayer("a", {
       },
       Elements: {
         unlocked() {
-          return hasMilestone("a", 1);
+          return hasMilestone("a", 1) || player.m.points.gte(1);
         },
         content: [
           "main-display", // start of necessary
