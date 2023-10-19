@@ -12,13 +12,15 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0.1",
+	num: "0.0.1_f2",
 	name: "Humble Beginnings",
 }
 
 let changelog = `
 <h1>Changelog:</h1><br>
-<h5>v0.0.1f1</h5><br>
+<b>v0.0.1f2</b><br>
+- Wow even more formatting issues<br>
+<b>v0.0.1f1</b><br>
 - Forgot to change the mod id and name :P<br>
 <h3>v0.0.1</h3><br>
 - Added ideas.<br>
