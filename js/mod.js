@@ -1,10 +1,9 @@
 let modInfo = {
-	name: "The ??? Tree",
-	id: "mymod",
-	author: "nobody",
+	name: "The Existance Tree",
+	id: "lmaotreegobrrr_harry",
+	author: "Harry (psi)",
 	pointsName: "points",
 	modFiles: ["layers.js", "tree.js"],
-
 	discordName: "",
 	discordLink: "",
 	initialStartPoints: new Decimal (10), // Used for hard resets and new players
@@ -13,15 +12,19 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0",
-	name: "Literally nothing",
+	num: "0.0.1",
+	name: "Humble Beginnings",
 }
 
 let changelog = `
 <h1>Changelog:</h1><br>
+<h5>v0.0.1f1</h5><br>
+- Forgot to change the mod id and name :P<br>
+<h3>v0.0.1</h3><br>
+- Added ideas.<br>
+- Added a small prototype of boosters.<br>
 <h3>v0.0</h3><br>
-- Added things.<br>
-- Added stuff.
+- An idea.
 `
 
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
@@ -61,6 +64,7 @@ function addedPlayerData() { return {
 
 // Display extra things at the top of the page
 var displayThings = [
+	"Current Endgame: 1 booster (nothing after that lol)"
 ]
 
 // Determines when the game "ends"
