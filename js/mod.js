@@ -17,10 +17,12 @@ let VERSION = {
 	name: "Literally nothing",
 }
 
-let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.0</h3><br>
-		- Added things.<br>
-		- Added stuff.`
+let changelog = `
+<h1>Changelog:</h1><br>
+<h3>v0.0</h3><br>
+- Added things.<br>
+- Added stuff.
+`
 
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
 
@@ -42,7 +44,14 @@ function getPointGen() {
 	if(!canGenPoints())
 		return new Decimal(0)
 
-	let gain = new Decimal(1)
+	let gain = new Decimal(0)
+	if (hasUpgrade("i", 11)) gain = gain.add(1)
+	if (hasUpgrade("i", 12)) gain = gain.add(1)
+	if (hasUpgrade("i", 13)) gain = gain.mul(2)
+	if (hasUpgrade("i", 21)) gain = gain.mul(upgradeEffect("i", 21))
+	if (hasUpgrade("i", 22)) gain = gain.mul(upgradeEffect("i", 22))
+
+	gain = gain.mul(tmp.b.effect)
 	return gain
 }
 
