@@ -27,7 +27,7 @@ addLayer("i", {
     },
     row: 0, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
-        {key: "i", description: "I: Reset for ideas points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+        {key: "i", description: "I: Reset for ideas points", onPress(){if (canReset("i")) doReset("i")}},
     ],
     layerShown(){return true},
     upgrades: {
@@ -93,7 +93,7 @@ addLayer("i", {
         24: {
             title: "Self-synergy",
             description: "[8]<br>Idea gain is boosted by ideas.",
-            cost: D(350),
+            cost: D(250),
             unlocked() {return hasUpgrade("i", 23)},
             effect() {
                 return player.i.points.add(1).log(10).add(1)
@@ -120,7 +120,7 @@ addLayer("b", {
     baseResource: "ideas", // Name of resource prestige is based on
     baseAmount() {return player.i.points}, // Get the current amount of baseResource
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    exponent: 2, // Prestige currency exponent
+    exponent: 1.5, // Prestige currency exponent
     base: 2, // Prestige currency base
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)

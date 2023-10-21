@@ -12,12 +12,15 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0.1_f2",
+	num: "0.0.1_f3",
 	name: "Humble Beginnings",
 }
 
 let changelog = `
 <h1>Changelog:</h1><br>
+<b>v0.0.1f3</b><br>
+- Rebalanced the booster cost.
+- Upgrade 8 cost reduced (350 => 250)
 <b>v0.0.1f2</b><br>
 - Wow even more formatting issues<br>
 <b>v0.0.1f1</b><br>
