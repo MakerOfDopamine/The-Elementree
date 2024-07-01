@@ -1,13 +1,12 @@
 let modInfo = {
-	name: "The ??? Tree",
-	id: "mymod",
-	author: "nobody",
-	pointsName: "points",
+	name: "The RPG Tree",
+	id: "therpgthatnobodyaskedfor",
+	author: "Psi",
+	pointsName: "seconds playing this game",
 	modFiles: ["layers.js", "tree.js"],
-
 	discordName: "",
 	discordLink: "",
-	initialStartPoints: new Decimal (10), // Used for hard resets and new players
+	initialStartPoints: new Decimal (0), // Used for hard resets and new players
 	offlineLimit: 1,  // In hours
 }
 
@@ -17,12 +16,14 @@ let VERSION = {
 	name: "Literally nothing",
 }
 
-let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.0</h3><br>
-		- Added things.<br>
-		- Added stuff.`
+let changelog = `
+<h1>Changelog:</h1><br>
+<h3>v0.0</h3><br>
+	- Added things.<br>
+	- Added stuff.
+`
 
-let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
+let winText = `How did you see this??`
 
 // If you add new functions anywhere inside of a layer, and those functions have an effect when called, add them here.
 // (The ones here are examples, all official functions are already taken care of)
@@ -41,22 +42,29 @@ function canGenPoints(){
 function getPointGen() {
 	if(!canGenPoints())
 		return new Decimal(0)
-
-	let gain = new Decimal(1)
-	return gain
+	return new Decimal(1)
 }
 
 // You can add non-layer related variables that should to into "player" and be saved here, along with default values
 function addedPlayerData() { return {
+	gameInitStage: 0
 }}
 
 // Display extra things at the top of the page
 var displayThings = [
+	() => {
+		if (player.timePlayed < 60) return ""
+		if (player.timePlayed < 3600) return `That's equivalent to ${format(player.timePlayed / 60, 2)} minutes!`
+		if (player.timePlayed < 86400) return `That's equivalent to ${format(player.timePlayed / 3600, 2)} hours!`
+		if (player.timePlayed < 31536000) return `That's equivalent to ${format(player.timePlayed / 86400, 2)} days!`
+		if (player.timePlayed < 3153600000) return `That's equivalent to ${format(player.timePlayed / 31536000, 2)} years!`
+		return "fuckign hacker"
+	}
 ]
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("e280000000"))
+	return false
 }
 
 
